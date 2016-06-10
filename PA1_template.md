@@ -67,20 +67,12 @@ The assignment does not require the code for downloading the file, but I include
 fileUrl <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
 download.file(fileUrl, destfile = "activity.zip", method = 
                       "curl")
-```
-
-```
-## Warning in download.file(fileUrl, destfile = "activity.zip", method =
-## "curl"): download had nonzero exit status
-```
-
-```r
 dateDownloaded <- now()
 ```
 
 This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals throughout the day. The data consists of two months of data from an anonymous individual collected during the months of October and November 2012 and include the number of steps taken in 5 minute intervals each day.
 
-The Activity Monitor Data was downloaded from <https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip> on 2016-06-10 13:39:54.
+The Activity Monitor Data was downloaded from <https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip> on 2016-06-10 16:51:45.
 
 1. Load the data.
 
@@ -165,6 +157,21 @@ print(totalStepsByDay)
 ## 9  2012-10-09      12811 44.48264      0
 ## 10 2012-10-10       9900 34.37500      0
 ## ..        ...        ...      ...    ...
+```
+
+```r
+summary(totalStepsByDay)
+```
+
+```
+##          date      totalSteps         mean             median 
+##  2012-10-01: 1   Min.   :    0   Min.   : 0.1424   Min.   :0  
+##  2012-10-02: 1   1st Qu.: 6778   1st Qu.:30.6979   1st Qu.:0  
+##  2012-10-03: 1   Median :10395   Median :37.3785   Median :0  
+##  2012-10-04: 1   Mean   : 9354   Mean   :37.3826   Mean   :0  
+##  2012-10-05: 1   3rd Qu.:12811   3rd Qu.:46.1597   3rd Qu.:0  
+##  2012-10-06: 1   Max.   :21194   Max.   :73.5903   Max.   :0  
+##  (Other)   :55                   NA's   :8         NA's   :8
 ```
 
 2. Make a histogram of the total number of steps taken each day.
@@ -421,6 +428,37 @@ head(imputedByDate)
 ```
 
 ```r
+summary(imputedByDate)
+```
+
+```
+##          date    totalImputedSteps avgImputedSteps   medianImputedSteps
+##  2012-10-01: 1   Min.   :   41     Min.   : 0.1424   Min.   : 0.000    
+##  2012-10-02: 1   1st Qu.: 9819     1st Qu.:34.0938   1st Qu.: 0.000    
+##  2012-10-03: 1   Median :10766     Median :37.3826   Median : 0.000    
+##  2012-10-04: 1   Mean   :10766     Mean   :37.3826   Mean   : 4.474    
+##  2012-10-05: 1   3rd Qu.:12811     3rd Qu.:44.4826   3rd Qu.: 0.000    
+##  2012-10-06: 1   Max.   :21194     Max.   :73.5903   Max.   :34.113    
+##  (Other)   :55                                                         
+##  totalOrigSteps   avgOrigSteps     medianOrigSteps   deltaTotal   
+##  Min.   :    0   Min.   : 0.1424   Min.   :0       Min.   :    0  
+##  1st Qu.: 6778   1st Qu.:30.6979   1st Qu.:0       1st Qu.:    0  
+##  Median :10395   Median :37.3785   Median :0       Median :    0  
+##  Mean   : 9354   Mean   :37.3826   Mean   :0       Mean   : 1412  
+##  3rd Qu.:12811   3rd Qu.:46.1597   3rd Qu.:0       3rd Qu.:    0  
+##  Max.   :21194   Max.   :73.5903   Max.   :0       Max.   :10766  
+##                  NA's   :8         NA's   :8                      
+##     deltaAvg  deltaMedian
+##  Min.   :0   Min.   :0   
+##  1st Qu.:0   1st Qu.:0   
+##  Median :0   Median :0   
+##  Mean   :0   Mean   :0   
+##  3rd Qu.:0   3rd Qu.:0   
+##  Max.   :0   Max.   :0   
+##  NA's   :8   NA's   :8
+```
+
+```r
 plot3 <-hist(imputedByDate$totalImputedSteps, xlab = 
         "Total Imputed Steps Each Day", main = 
         "Plot 3: Frequency Distribution of Total Imputed Steps Taken Each Day")
@@ -479,6 +517,20 @@ head(totalStepsByInterval)
 ## 4       15              8          9.207547
 ## 5       20              4          4.603774
 ## 6       25            111        127.754717
+```
+
+```r
+summary(totalStepsByInterval)
+```
+
+```
+##     interval      totalOrigSteps    totalImputedSteps
+##  Min.   :   0.0   Min.   :    0.0   Min.   :    0.0  
+##  1st Qu.: 588.8   1st Qu.:  131.8   1st Qu.:  151.6  
+##  Median :1177.5   Median : 1808.0   Median : 2080.9  
+##  Mean   :1177.5   Mean   : 1981.3   Mean   : 2280.3  
+##  3rd Qu.:1766.2   3rd Qu.: 2800.2   3rd Qu.: 3222.9  
+##  Max.   :2355.0   Max.   :10927.0   Max.   :12576.4
 ```
 
 ```r

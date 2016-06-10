@@ -73,6 +73,7 @@ totalStepsByDay <- activityOrigDfTbl %>%
                   mean = mean(steps, na.rm = TRUE),
                   median = median(steps, na.rm = TRUE))
 print(totalStepsByDay)
+summary(totalStepsByDay)
 ```
 
 2. Make a histogram of the total number of steps taken each day.
@@ -196,6 +197,7 @@ imputedByDate <- activityImputedDfTbl %>%
                 deltaAvg = avgImputedSteps - avgOrigSteps, 
                 deltaMedian = medianImputedSteps - medianOrigSteps)
 head(imputedByDate)
+summary(imputedByDate)
 
 plot3 <-hist(imputedByDate$totalImputedSteps, xlab = 
         "Total Imputed Steps Each Day", main = 
@@ -223,6 +225,8 @@ totalStepsByInterval <- activityImputedDfTbl %>%
         summarize(totalOrigSteps = sum(steps, na.rm = TRUE), 
                   totalImputedSteps = sum(imputedSteps))
 head(totalStepsByInterval)
+summary(totalStepsByInterval)
+
 plot4 <- ggplot(totalStepsByInterval, aes(interval, totalImputedSteps))
 plot4 <- plot4 + geom_line(aes(color = "Imputed"))  + geom_line(aes(interval, 
         totalOrigSteps, color = "Original")) + labs(x = "Interval", 

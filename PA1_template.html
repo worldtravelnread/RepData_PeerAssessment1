@@ -146,12 +146,10 @@ library(ggplot2)</code></pre>
 <p>The assignment does not require the code for downloading the file, but I included it for the sake of completeness.</p>
 <pre class="r"><code>fileUrl &lt;- &quot;https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip&quot;
 download.file(fileUrl, destfile = &quot;activity.zip&quot;, method = 
-                      &quot;curl&quot;)</code></pre>
-<pre><code>## Warning in download.file(fileUrl, destfile = &quot;activity.zip&quot;, method =
-## &quot;curl&quot;): download had nonzero exit status</code></pre>
-<pre class="r"><code>dateDownloaded &lt;- now()</code></pre>
+                      &quot;curl&quot;)
+dateDownloaded &lt;- now()</code></pre>
 <p>This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals throughout the day. The data consists of two months of data from an anonymous individual collected during the months of October and November 2012 and include the number of steps taken in 5 minute intervals each day.</p>
-<p>The Activity Monitor Data was downloaded from <a href="https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip">https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip</a> on 2016-06-10 13:39:54.</p>
+<p>The Activity Monitor Data was downloaded from <a href="https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip">https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip</a> on 2016-06-10 16:51:45.</p>
 <ol style="list-style-type: decimal">
 <li>Load the data.</li>
 </ol>
@@ -218,6 +216,15 @@ print(totalStepsByDay)</code></pre>
 ## 9  2012-10-09      12811 44.48264      0
 ## 10 2012-10-10       9900 34.37500      0
 ## ..        ...        ...      ...    ...</code></pre>
+<pre class="r"><code>summary(totalStepsByDay)</code></pre>
+<pre><code>##          date      totalSteps         mean             median 
+##  2012-10-01: 1   Min.   :    0   Min.   : 0.1424   Min.   :0  
+##  2012-10-02: 1   1st Qu.: 6778   1st Qu.:30.6979   1st Qu.:0  
+##  2012-10-03: 1   Median :10395   Median :37.3785   Median :0  
+##  2012-10-04: 1   Mean   : 9354   Mean   :37.3826   Mean   :0  
+##  2012-10-05: 1   3rd Qu.:12811   3rd Qu.:46.1597   3rd Qu.:0  
+##  2012-10-06: 1   Max.   :21194   Max.   :73.5903   Max.   :0  
+##  (Other)   :55                   NA's   :8         NA's   :8</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Make a histogram of the total number of steps taken each day.</li>
 </ol>
@@ -411,6 +418,31 @@ head(imputedByDate)</code></pre>
 ## Variables not shown: totalOrigSteps (int), avgOrigSteps (dbl),
 ##   medianOrigSteps (dbl), deltaTotal (dbl), deltaAvg (dbl), deltaMedian
 ##   (dbl)</code></pre>
+<pre class="r"><code>summary(imputedByDate)</code></pre>
+<pre><code>##          date    totalImputedSteps avgImputedSteps   medianImputedSteps
+##  2012-10-01: 1   Min.   :   41     Min.   : 0.1424   Min.   : 0.000    
+##  2012-10-02: 1   1st Qu.: 9819     1st Qu.:34.0938   1st Qu.: 0.000    
+##  2012-10-03: 1   Median :10766     Median :37.3826   Median : 0.000    
+##  2012-10-04: 1   Mean   :10766     Mean   :37.3826   Mean   : 4.474    
+##  2012-10-05: 1   3rd Qu.:12811     3rd Qu.:44.4826   3rd Qu.: 0.000    
+##  2012-10-06: 1   Max.   :21194     Max.   :73.5903   Max.   :34.113    
+##  (Other)   :55                                                         
+##  totalOrigSteps   avgOrigSteps     medianOrigSteps   deltaTotal   
+##  Min.   :    0   Min.   : 0.1424   Min.   :0       Min.   :    0  
+##  1st Qu.: 6778   1st Qu.:30.6979   1st Qu.:0       1st Qu.:    0  
+##  Median :10395   Median :37.3785   Median :0       Median :    0  
+##  Mean   : 9354   Mean   :37.3826   Mean   :0       Mean   : 1412  
+##  3rd Qu.:12811   3rd Qu.:46.1597   3rd Qu.:0       3rd Qu.:    0  
+##  Max.   :21194   Max.   :73.5903   Max.   :0       Max.   :10766  
+##                  NA's   :8         NA's   :8                      
+##     deltaAvg  deltaMedian
+##  Min.   :0   Min.   :0   
+##  1st Qu.:0   1st Qu.:0   
+##  Median :0   Median :0   
+##  Mean   :0   Mean   :0   
+##  3rd Qu.:0   3rd Qu.:0   
+##  Max.   :0   Max.   :0   
+##  NA's   :8   NA's   :8</code></pre>
 <pre class="r"><code>plot3 &lt;-hist(imputedByDate$totalImputedSteps, xlab = 
         &quot;Total Imputed Steps Each Day&quot;, main = 
         &quot;Plot 3: Frequency Distribution of Total Imputed Steps Taken Each Day&quot;)</code></pre>
@@ -452,6 +484,14 @@ head(totalStepsByInterval)</code></pre>
 ## 4       15              8          9.207547
 ## 5       20              4          4.603774
 ## 6       25            111        127.754717</code></pre>
+<pre class="r"><code>summary(totalStepsByInterval)</code></pre>
+<pre><code>##     interval      totalOrigSteps    totalImputedSteps
+##  Min.   :   0.0   Min.   :    0.0   Min.   :    0.0  
+##  1st Qu.: 588.8   1st Qu.:  131.8   1st Qu.:  151.6  
+##  Median :1177.5   Median : 1808.0   Median : 2080.9  
+##  Mean   :1177.5   Mean   : 1981.3   Mean   : 2280.3  
+##  3rd Qu.:1766.2   3rd Qu.: 2800.2   3rd Qu.: 3222.9  
+##  Max.   :2355.0   Max.   :10927.0   Max.   :12576.4</code></pre>
 <pre class="r"><code>plot4 &lt;- ggplot(totalStepsByInterval, aes(interval, totalImputedSteps))
 plot4 &lt;- plot4 + geom_line(aes(color = &quot;Imputed&quot;))  + geom_line(aes(interval, 
         totalOrigSteps, color = &quot;Original&quot;)) + labs(x = &quot;Interval&quot;, 
